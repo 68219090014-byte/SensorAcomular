@@ -1,12 +1,10 @@
 /* LAB4.2 4x4 */
-//https://app.cirkitdesigner.com/project/34822138-8bab-4519-8239-c361b18dd46d
+//https://app.cirkitdesigner.com/project/591d0392-5433-4806-9eae-8eee45b637ec
 
 #include <Keypad.h>
 
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
-
-// #define ledPinR 13
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
@@ -26,12 +24,11 @@ char keys[ROWS][COLS] = {
 
 Keypad keypad = Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 
-String input_password ="";
-
 void setup() {
+  // put your setup code here, to run once:
  Serial.begin(9600); 
   Serial.println("4x4 Keypad Test");
-  
+
   lcd.init();
   lcd.backlight();
   lcd.clear();
@@ -49,13 +46,12 @@ void setup() {
 void loop() {
   lcd.setCursor(0, 0);
   lcd.print("Key Pressed");
-
   char key = keypad.getKey(); // Get the key pressed
 
   if (key) { // If a key is pressed
-    input_password +=key;
+
     lcd.setCursor(0, 1);
-    lcd.print(input_password);
+    lcd.print(key);
 
     Serial.print("Key Pressed: ");
     Serial.println(key); // Print the key to the serial monitor
